@@ -2,6 +2,7 @@ Ansibilo - Set of tools for Ansible
 ===================================
 
 Ansibilo is a set of tools for Ansible. It provides:
+
 - ``facto``, an Ansible module to create secrets and select unused ports on the remote host (and reused them at the next run).
 - A command line interface to export Ansible inventory in different formats.
 - A Sphinx extension which allow to include a graph of the inventory in the documentation.
