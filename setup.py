@@ -10,7 +10,7 @@ def read(file_path):
 
 setup(
     name='ansibilo',
-    version='0.1dev3',
+    version='0.1dev4',
     description="Set of tools for Ansible",
     long_description=read('README.rst'),
     classifiers=[
@@ -36,11 +36,13 @@ setup(
     packages=find_packages(where='src') + [
         'ansible.modules.ansibilo',
         'ansible.plugins.callback.ansibilo',
+        'ansible.plugins.filter.ansibilo',
     ],
     package_dir={
         '': str('src'),
         'ansible.modules.ansibilo': str('src/ansibilo/modules'),
         'ansible.plugins.callback.ansibilo': str('src/ansibilo/plugins/callbacks'),
+        'ansible.plugins.filter.ansibilo': str('src/ansibilo/plugins/filters'),
     },
     include_package_data=True,
     zip_safe=False,
@@ -51,6 +53,7 @@ setup(
         'ansible',
         'click',
         'graphviz',
+        'netaddr',
     ],
     extras_require={
       'sphinx': [
