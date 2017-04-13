@@ -10,7 +10,7 @@ def read(file_path):
 
 setup(
     name='ansibilo',
-    version='0.1dev4',
+    version='0.1dev5',
     description="Set of tools for Ansible",
     long_description=read('README.rst'),
     classifiers=[
@@ -53,6 +53,7 @@ setup(
         'ansible',
         'click',
         'graphviz',
+        'humanize',
         'netaddr',
     ],
     extras_require={
