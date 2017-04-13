@@ -1,0 +1,15 @@
+# project
+-e .[sphinx]
+
+# Documentation
+Sphinx
+sphinx_rtd_theme
+
+# Tests and Quality
+check-manifest
+flake8
+pytest
+tox
+
+# Release
+zest.releaser[recommended]
