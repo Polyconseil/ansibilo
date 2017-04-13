@@ -10,7 +10,7 @@ def read(file_path):
 
 setup(
     name='ansibilo',
-    version='0.1dev0',
+    version='0.1dev2',
     description="Set of tools for Ansible",
     long_description=read('README.rst'),
     classifiers=[
@@ -33,10 +33,14 @@ setup(
     author_email='opensource+ansibilo@polyconseil.fr',
     url='https://github.com/Polyconseil/ansibilo/',
     license='BSD',
-    packages=find_packages(where='src') + ['ansible.modules.ansibilo'],
+    packages=find_packages(where='src') + [
+        'ansible.modules.ansibilo',
+        'ansible.plugins.callback.ansibilo',
+    ],
     package_dir={
         '': str('src'),
         'ansible.modules.ansibilo': str('src/ansibilo/modules'),
+        'ansible.plugins.callback.ansibilo': str('src/ansibilo/plugins/callbacks'),
     },
     include_package_data=True,
     zip_safe=False,
