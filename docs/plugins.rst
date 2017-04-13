@@ -2,7 +2,7 @@ Ansible callback plugins
 ========================
 
 Callback modules are activated by adding their name in the
-``defaults.callback_whitelist`` key of the ansible config file.
+``callback_whitelist`` key of the ``defaults`` section of the ansible config file.
 
 Pretty print result
 -------------------
