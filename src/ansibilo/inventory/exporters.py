@@ -20,7 +20,7 @@ def export_to_dot(host_groups, data_center_prefix='dc-'):
     role_colors = _colors('black', '#b2e2e2')
 
     graph = graphviz.Graph()
-    graph.attr('graph', overlap='false', layout='sfdp', comment=ANSIBLE_INVENTORY_TAG)
+    graph.attr('graph', overlap='false', layout='neato', comment=ANSIBLE_INVENTORY_TAG)
     for fqdn, labels in host_groups.items():
         host = fqdn.split('.')[0]
         graph.node(host, **host_colors)
