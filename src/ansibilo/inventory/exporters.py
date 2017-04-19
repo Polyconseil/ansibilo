@@ -1,4 +1,6 @@
+import collections
 import json
+
 import graphviz
 
 
@@ -35,8 +37,16 @@ def export_to_dot(host_groups, data_center_prefix='dc-'):
     return graph
 
 
-def export_to_json(host_groups, data_center_prefix='dc-'):
+def export_to_json(host_groups, data_center_prefix=None):
     return json.dumps(host_groups, indent=True)
+
+
+def export_to_ansible_json(host_groups, data_center_prefix=None):
+    groups = collections.defaultdict(list)
+    for host, group_list in host_groups.items():
+        for group in group_list:
+            groups[group].append(host)
+    return json.dumps(groups, indent=True)
 
 
 def export_to_svg(*args, **kwargs):
@@ -46,6 +56,7 @@ def export_to_svg(*args, **kwargs):
 
 
 FORMAT_EXPORTERS = {
+    'ansible-json': export_to_ansible_json,
     'dot': export_to_dot,
     'json': export_to_json,
     'svg': export_to_svg,
