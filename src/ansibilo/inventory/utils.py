@@ -22,7 +22,7 @@ class DataLoader(ansible.parsing.dataloader.DataLoader):
         self._vault = FakeVaultLib(b_password=None)
 
 
-def get_ansible_inventory():
+def get_ansible_inventory(inventory_file=None):
     data_loader = DataLoader()
     variable_manager = ansible.vars.VariableManager()
 
@@ -38,11 +38,12 @@ def get_ansible_inventory():
     return ansible.inventory.Inventory(
         loader=data_loader,
         variable_manager=variable_manager,
+        host_list=inventory_file or ansible.constants.DEFAULT_HOST_LIST,
     )
 
 
-def get_host_groups():
-    inventory = get_ansible_inventory()
+def get_host_groups(inventory_file=None):
+    inventory = get_ansible_inventory(inventory_file)
     return {
         host.name: [
             group.name
