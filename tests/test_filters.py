@@ -12,7 +12,7 @@ def test_list_or_default_list():
 
 def test_flatten():
     assert filters.flatten([[1, 2], 3]) == [1, 2, 3]
-    assert filters.flatten({'a': 1, 'b': [2, 3]}) == [1, 2, 3]
+    assert sorted(filters.flatten({'a': 1, 'b': [2, 3]})) == [1, 2, 3]
     assert filters.flatten(1) == [1]
 
 
