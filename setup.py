@@ -10,7 +10,7 @@ def read(file_path):
 
 setup(
     name='ansibilo',
-    version='0.1dev8',
+    version='0.1.1',
     description="Set of tools for Ansible",
     long_description=read('README.rst'),
     classifiers=[

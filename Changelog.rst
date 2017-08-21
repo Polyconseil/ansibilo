@@ -1,7 +1,7 @@
 ChangeLog
 =========
 
-0.1.1 (unreleased)
+0.1.1 (2017-08-21)
 ------------------
 
 - Fix flatten filter when using Python 3
