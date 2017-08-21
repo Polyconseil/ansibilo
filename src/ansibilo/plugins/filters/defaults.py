@@ -19,7 +19,7 @@ def flatten(elements):
     if isinstance(elements, list):
         return [item for element in elements for item in flatten(element)]
     elif isinstance(elements, dict):
-        return flatten(elements.values())
+        return flatten(list(elements.values()))
     else:
         return [elements]
 
