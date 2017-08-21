@@ -8,3 +8,4 @@ Ansibilo - Set of tools for Ansible
     plugins
     cli
     sphinxext
+    Changelog
