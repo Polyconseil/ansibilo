@@ -12,7 +12,7 @@ from .inventory import utils
 class AnsibleInventoryGraphDirective(sphinx_graphviz.Graphviz):
     def run(self):
         self.content = exporters.export_to_dot(utils.get_host_groups())
-        return super().run()
+        return super(AnsibleInventoryGraphDirective, self).run()
 
 
 def render_dot_decorator(fct):

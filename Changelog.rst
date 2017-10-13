@@ -4,7 +4,7 @@ ChangeLog
 0.1.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Drop Python 3.4 support as Ansible does not support it
 
 
 0.1.1 (2017-08-21)
