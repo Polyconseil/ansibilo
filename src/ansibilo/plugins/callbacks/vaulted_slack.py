@@ -7,34 +7,26 @@ import os.path
 import humanize
 import requests
 
-import ansible.constants as C
-from ansible.cli import CLI
-from ansible.parsing import dataloader
+from ansible.constants import config
 from ansible.plugins.callback import CallbackBase
 
 
-def var_uri_value(uri):
-    """Read a value from the ansible vault.
-
-    Args:
-        - uri: str, URI formatted key to read in the vault (e.g.: path/to/vault.yml#section.key)
-
-    Returns: the value kept in the vault.
-    """
-    if '#' not in uri:
-        return None
-
-    file_path, name = uri.split('#')
-    path = name.split('.')
-
-    loader = dataloader.DataLoader()
-    b_vault_pass = CLI.read_vault_password_file(C.DEFAULT_VAULT_PASSWORD_FILE, loader=loader)
-    loader.set_vault_password(b_vault_pass)
-    data = loader.load_from_file(file_path)
-
-    for item in path[:-1]:
-        data = data.get(item, {})
-    return data[path[-1]]
+DOCUMENTATION = '''
+    callback: vaulted-slack
+    callback_type: notification
+    short_description: Sends play result to a Slack channel
+    description:
+        - This is an ansible callback plugin that sends play results to a Slack channel
+    options:
+      token:
+        required: True
+        description: Slack Webhook token
+        env:
+          - name: VAULTED_SLACK_TOKEN
+        ini:
+          - section: vaulted-slack
+            key: token
+'''
 
 
 class CallbackModule(CallbackBase):
@@ -47,15 +39,27 @@ class CallbackModule(CallbackBase):
 
     def __init__(self):
         super(CallbackModule, self).__init__()
-
-        slack_token_key_uri = C.get_config(C.p, 'vaulted-slack', 'token-key', None, 'slack_token')
-        self.token = var_uri_value(slack_token_key_uri)
-
-        self.slack_hook_url = self.SLACK_HOOK_FORMAT.format(token=self.token)
+        self._loader = None
         self.start_ts = None
         self.playbook_name = None
         self.user = None
         self.skip_slack = False
+
+    @property
+    def slack_hook_url(self):
+        if not self._loader:
+            return
+
+        slack_token_key_uri = config.get_config_value('token', plugin_type='callback', plugin_name='vaulted_slack')
+        file_path, name = slack_token_key_uri.split('#')
+        path = name.split('.')
+
+        data = self._loader.load_from_file(file_path)
+        for item in path[:-1]:
+            data = data.get(item, {})
+        token = data[path[-1]]
+
+        return self.SLACK_HOOK_FORMAT.format(token=token)
 
     def v2_runner_on_ok(self, res):
         try:
@@ -69,6 +73,7 @@ class CallbackModule(CallbackBase):
             pass
 
     def v2_playbook_on_start(self, playbook):
+        self._loader = playbook.get_loader()
         self.playbook_name = os.path.basename(playbook._file_name)
         self.start_ts = datetime.now()
 

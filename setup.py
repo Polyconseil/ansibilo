@@ -49,7 +49,7 @@ setup(
         'setuptools',
     ],
     install_requires=[
-        'ansible',
+        'ansible>=2.4',
         'click',
         'graphviz',
         'humanize',
