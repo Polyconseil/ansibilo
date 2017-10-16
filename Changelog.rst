@@ -1,7 +1,7 @@
 ChangeLog
 =========
 
-0.2.1 (unreleased)
+0.2.1 (2017-10-16)
 ------------------
 
 - Fix ansibilo ansible module/plugin installation
