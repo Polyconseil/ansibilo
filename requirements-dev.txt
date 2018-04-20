@@ -13,3 +13,4 @@ tox
 
 # Release
 zest.releaser[recommended]
+polydev.github
