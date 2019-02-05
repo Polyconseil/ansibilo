@@ -4,7 +4,7 @@ ChangeLog
 0.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Allow to use facto with Ansible check mode
 
 
 0.2.1 (2017-10-16)

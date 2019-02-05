@@ -151,7 +151,7 @@ def get_unused_port(protocol, already_reserved_ports):
     return get_unused_port(protocol, already_reserved_ports)
 
 
-def get_or_create(kind, key, db, **kwargs):
+def get_or_create(kind, key, db, dry_run=False, **kwargs):
     kinds = {
         'secret': lambda: (True, generate_secret(256)),
         'tcp-port': lambda: (False, get_unused_port('tcp', data)),
@@ -164,7 +164,8 @@ def get_or_create(kind, key, db, **kwargs):
         return data[key], False
 
     undisclosed, data[key] = kinds[kind]()
-    write(filename, data, undisclosed)
+    if not dry_run:
+        write(filename, data, undisclosed)
     return data[key], True
 
 
@@ -176,9 +177,10 @@ def main():
             'db': {'default': FACT_DIRECTORY},
             'fact': {'required': False},
         },
+        supports_check_mode=True,
     )
 
-    value, created = get_or_create(**module.params)
+    value, created = get_or_create(dry_run=module.check_mode, **module.params)
     facts = {module.params['fact']: value} if module.params['fact'] else {}
     return module.exit_json(
         changed=created,
