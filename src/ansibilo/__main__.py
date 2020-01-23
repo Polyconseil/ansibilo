@@ -10,7 +10,7 @@ def main():
 
 
 @main.command('export-inventory')
-@click.option('--data-center-prefix', default='dc-')
+@click.option('--data-center-prefix', default=exporters.DEFAULT_DATA_CENTER_PREFIX)
 @click.option('-i', '--inventory-file')
 @click.argument('output_format', type=click.Choice(exporters.FORMAT_EXPORTERS))
 def export_inventory(output_format, data_center_prefix, inventory_file):

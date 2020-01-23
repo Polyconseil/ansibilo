@@ -6,6 +6,7 @@ import graphviz
 
 
 ANSIBLE_INVENTORY_TAG = '-:ansible-inventory:-'
+DEFAULT_DATA_CENTER_PREFIX = 'dc_'
 
 
 def _colors(foreground, background):
@@ -17,7 +18,7 @@ def _colors(foreground, background):
     }
 
 
-def export_to_dot(host_groups, data_center_prefix='dc-'):
+def export_to_dot(host_groups, data_center_prefix=DEFAULT_DATA_CENTER_PREFIX):
     data_center_colors = _colors('white', '#238b45')
     host_colors = _colors('black', '#66c2a4')
     role_colors = _colors('black', '#b2e2e2')

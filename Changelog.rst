@@ -4,6 +4,7 @@ ChangeLog
 0.4 (unreleased)
 ----------------
 
+- Use new Ansible convention for data center prefix
 - Improve dot export output
 
 
