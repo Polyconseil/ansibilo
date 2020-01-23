@@ -4,6 +4,8 @@ ChangeLog
 0.4 (unreleased)
 ----------------
 
+- Add Python 3.7 and 3.8 support
+- Remove Python 2.7 support **breaking change**
 - Use new Ansible convention for data center prefix
 - Improve dot export output
 
