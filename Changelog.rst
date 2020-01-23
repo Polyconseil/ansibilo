@@ -4,7 +4,7 @@ ChangeLog
 0.4 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Improve dot export output
 
 
 0.3 (2019-02-05)

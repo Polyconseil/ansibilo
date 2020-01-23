@@ -14,10 +14,10 @@ def get_ansible_inventory(inventory_file=None):
 def get_host_groups(inventory_file=None):
     inventory = get_ansible_inventory(inventory_file)
     return {
-        host.name: [
+        host.name: sorted(
             group.name
             for group in host.get_groups()
             if group.name != 'all'
-        ]
+        )
         for host in inventory.list_hosts()
     }
