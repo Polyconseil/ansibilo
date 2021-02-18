@@ -4,7 +4,7 @@ ChangeLog
 0.5 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- add render_dot compatibility with sphinx version 3.5
 
 
 0.4 (2020-01-24)
